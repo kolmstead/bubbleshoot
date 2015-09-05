@@ -1,14 +1,19 @@
+// Chp 3 edits - Bubble Queue
+
 var BubbleShoot = window.BubbleShoot || {};
 
 BubbleShoot.Game = (function($){
     var Game = function(){
         var curBubble;
         var board;
+        var numBubbles;
+        var MAX_BUBBLES = 7;
         this.init = function(){
             $(".but_start_game").bind("click",startGame);
         };
         var startGame = function(){
            $(".but_start_game").unbind("click");
+           numBubbles = MAX_BUBBLES;
            BubbleShoot.ui.hideDialog();
            curBubble = getNextBubble();
            board = new BubbleShoot.Board();
@@ -19,6 +24,8 @@ BubbleShoot.Game = (function($){
             var bubble = BubbleShoot.Bubble.create();
             bubble.getSprite().addClass("cur_bubble");
             $("#board").append(bubble.getSprite());
+            BubbleShoot.ui.drawBubblesRemaining(numBubbles);
+            numBubbles--;
             return bubble;
         };
         var clickGameScreen = function(e){
@@ -34,6 +41,7 @@ BubbleShoot.Game = (function($){
                 y : bubbleCoords.top - distY
             };
             BubbleShoot.ui.fireBubble(curBubble, coords, duration);
+            curBubble = getNextBubble();
           };
         };
     return Game;

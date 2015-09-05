@@ -1,10 +1,10 @@
-// Chp 3 edits
+// Chp 3 edits - building Bubble Queue
 
 var BubbleShoot = window.BubbleShoot || {};
 BubbleShoot.ui = (function($){
     var ui = {
         BUBBLE_DIMS : 44,
-        ROW_HEIGHT : 40,
+        ROW_HEIGHT : 39,
         init : function(){
             
         },
@@ -62,6 +62,9 @@ BubbleShoot.ui = (function($){
                     };
                 };
             };
+        },
+        drawBubblesRemaining : function(numBubbles){
+            $("#bubbles_remaining").text(numBubbles);
         }
     };
     return ui;
