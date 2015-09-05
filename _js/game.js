@@ -1,4 +1,4 @@
-// Chp 3 edits - Bubble Queue
+// Chp 3 edits - Collision Detection
 
 var BubbleShoot = window.BubbleShoot || {};
 
@@ -32,14 +32,21 @@ BubbleShoot.Game = (function($){
             var angle = BubbleShoot.ui.getBubbleAngle(curBubble.getSprite(),e);
             var duration = 750;
             var distance = 1000;
-            var distX = Math.sin(angle) * distance;
-            var distY = Math.cos(angle) * distance;
-            var bubbleCoords = BubbleShoot.ui.getBubbleCoords(curBubble.
+            var collision = BubbleShoot.CollisionDetector.findIntersection(curBubble,board,angle);
+            if(collision){
+                var coords = collision.coords;
+                duration = Math.round(duration * collision.distToCollision / distance);
+                board.addBubble(curBubble,coords);
+            } else {
+              var distX = Math.sin(angle) * distance;
+              var distY = Math.cos(angle) * distance;
+              var bubbleCoords = BubbleShoot.ui.getBubbleCoords(curBubble.
                 getSprite());
-            var coords = {
+              var coords = {
                 x : bubbleCoords.left + distX,
                 y : bubbleCoords.top - distY
-            };
+              };
+            };  
             BubbleShoot.ui.fireBubble(curBubble, coords, duration);
             curBubble = getNextBubble();
           };

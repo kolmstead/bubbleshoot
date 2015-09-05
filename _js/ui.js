@@ -1,10 +1,10 @@
-// Chp 3 edits - building Bubble Queue
+// Chp 3 edits - Collision Detection
 
 var BubbleShoot = window.BubbleShoot || {};
 BubbleShoot.ui = (function($){
     var ui = {
         BUBBLE_DIMS : 44,
-        ROW_HEIGHT : 39,
+        ROW_HEIGHT : 40,
         init : function(){
             
         },
@@ -40,7 +40,15 @@ BubbleShoot.ui = (function($){
             },
             {
                 duration : duration,
-                easing : "linear"
+                easing : "linear",
+                complete : function(){
+                    if(bubble.getRow() !== null){
+                        bubble.getSprite().css({
+                            left : bubble.getCoords().left - ui.BUBBLE_DIMS/2,
+                            top : bubble.getCoords().top - ui.BUBBLE_DIMS/2
+                        });
+                    };
+                }
             });
         },
         drawBoard : function(board){
