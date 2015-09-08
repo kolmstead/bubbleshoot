@@ -1,4 +1,4 @@
-// Chp 3 edits - Collision Detection
+// Chp 3 edits - Collision Detection (one more edit on 9-7-15 -pko)
 var BubbleShoot = window.BubbleShoot || {};
 BubbleShoot.Board = (function($){
   var NUM_ROWS = 9;
