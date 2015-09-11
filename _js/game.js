@@ -1,4 +1,4 @@
-// Chp 4 - Game State (fetching bubbles)
+// Chp 4 - Game State (popping bubbles)
 
 var BubbleShoot = window.BubbleShoot || {};
 
@@ -57,10 +57,14 @@ BubbleShoot.Game = (function($){
           var popBubbles = function(bubbles,delay){
               $.each(bubbles,function(){
                   var bubble = this;
+                  setTimeout(function() {
+                      bubble.animatePop();
+                  },delay);
                   board.popBubbleAt(this.getRow(),this.getCol());
                   setTimeout(function(){
                       bubble.getSprite().remove();
                   },delay + 200);
+                  delay += 60;
               });
           };
         };
